@@ -17,8 +17,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for LoginActivity
+ *
+ * @author Ivan Widjanarko
+ * @version 26-05-2021
+ */
 public class LoginActivity extends AppCompatActivity {
 
+    /**
+     * method for create Login Page
+     * @param savedInstanceState saveInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,22 +40,35 @@ public class LoginActivity extends AppCompatActivity {
         final TextView tvRegister = findViewById(R.id.textViewRegisterNow);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * method for Login (on click)
+             * @param view view
+             */
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 final String email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+                    /**
+                     * method for Login (on response)
+                     * @param response response
+                     */
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject != null) {
-                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,
+                                                    "Login Successful",
+                                                        Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-//                            e.printStackTrace();
+                            Toast.makeText(LoginActivity.this,
+                                                "Login Failed",
+                                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
@@ -57,8 +80,12 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
+            /**
+             * method for Register Now (on click)
+             * @param view view
+             */
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
