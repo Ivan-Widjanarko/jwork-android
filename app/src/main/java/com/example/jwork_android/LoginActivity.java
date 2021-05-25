@@ -24,16 +24,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText etEmail = findViewById(R.id.editTextTextEmailAddress);
-        EditText etPassword = findViewById(R.id.editTextTextPassword);
-        Button btnLogin = findViewById(R.id.buttonLogin);
-        TextView tvRegister = findViewById(R.id.textViewRegisterNow);
+        final EditText etEmail = findViewById(R.id.editTextTextEmailAddress);
+        final EditText etPassword = findViewById(R.id.editTextTextPassword);
+        final Button btnLogin = findViewById(R.id.buttonLogin);
+        final TextView tvRegister = findViewById(R.id.textViewRegisterNow);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
+                final String email = etEmail.getText().toString();
+                final String password = etPassword.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override

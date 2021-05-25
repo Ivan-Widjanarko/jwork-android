@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -23,17 +22,17 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        EditText etName = findViewById(R.id.editTextTextPersonNameRegister);
-        EditText etEmail = findViewById(R.id.editTextTextEmailAddressRegister);
-        EditText etPassword = findViewById(R.id.editTextTextPasswordRegister);
-        Button btnRegister = findViewById(R.id.buttonRegister);
+        final EditText etName = findViewById(R.id.editTextTextPersonNameRegister);
+        final EditText etEmail = findViewById(R.id.editTextTextEmailAddressRegister);
+        final EditText etPassword = findViewById(R.id.editTextTextPasswordRegister);
+        final Button btnRegister = findViewById(R.id.buttonRegister);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = etName.getText().toString();
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
+                final String name = etName.getText().toString();
+                final String email = etEmail.getText().toString();
+                final String password = etPassword.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
