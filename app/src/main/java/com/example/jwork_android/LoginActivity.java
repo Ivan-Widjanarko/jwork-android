@@ -21,7 +21,7 @@ import org.json.JSONObject;
  * Class for LoginActivity
  *
  * @author Ivan Widjanarko
- * @version 26-05-2021
+ * @version 27-05-2021
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -76,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest(email, password, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
