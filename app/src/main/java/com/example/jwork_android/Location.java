@@ -12,15 +12,14 @@ public class Location
 
     /**
      * Constructor for objects of class Location
-     * @param string
-     * @param city
+     * @param city Recruiter's City
      * @param province Recruiter's province
+     * @param description Location's Description
      *
      */
-    public Location(String string, String city, String province)
-    {
+    public Location(String city, String province, String description){
+        this.city = city;
         this.province = province;
-        this.city = this.city;
         this.description = description;
     }
 
@@ -28,8 +27,7 @@ public class Location
      * method for getProvince
      * @return    Recruiter's province
      */
-    public String getProvince()
-    {
+    public String getProvince(){
         return province;
     }
 
@@ -37,8 +35,7 @@ public class Location
      * method for getCity
      * @return    Recruiter's city
      */
-    public String getCity()
-    {
+    public String getCity(){
         return city;
     }
 
@@ -46,8 +43,7 @@ public class Location
      * method for getDescription
      * @return    Recruiter's description
      */
-    public String getDescription()
-    {
+    public String getDescription(){
         return description;
     }
 
@@ -55,8 +51,7 @@ public class Location
      * method for setProvince
      * @param province Recruiter's province
      */
-    public void setProvince(String province)
-    {
+    public void setProvince(String province){
         this.province = province;
     }
 

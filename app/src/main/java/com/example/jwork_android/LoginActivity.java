@@ -33,42 +33,32 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        final EditText etEmail = findViewById(R.id.editTextTextEmailAddress);
-        final EditText etPassword = findViewById(R.id.editTextTextPassword);
-        final Button btnLogin = findViewById(R.id.buttonLogin);
-        final TextView tvRegister = findViewById(R.id.textViewRegisterNow);
+        EditText logEmail = findViewById(R.id.editTextTextEmailAddress);
+        EditText logPassword = findViewById(R.id.editTextTextPassword);
+        Button btnLogin = findViewById(R.id.buttonLogin);
+        TextView tvRegister = findViewById(R.id.textViewRegisterNow);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
-
-            /**
-             * method for Login (on click)
-             * @param view view
-             */
             @Override
             public void onClick(View view) {
-                final String email = etEmail.getText().toString();
-                final String password = etPassword.getText().toString();
-
+                String email = logEmail.getText().toString();
+                String password = logPassword.getText().toString();
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
-
-                    /**
-                     * method for Login (on response)
-                     * @param response response
-                     */
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject != null) {
-                                Toast.makeText(LoginActivity.this,
-                                                    "Login Successful",
-                                                        Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Login Successful",
+                                        Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
-                        } catch (JSONException e) {
-                            Toast.makeText(LoginActivity.this,
-                                                "Login Failed",
-                                                    Toast.LENGTH_SHORT).show();
+                        } catch (
+                                JSONException e) {
+                            Toast.makeText(LoginActivity.this, "Login Failed",
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 };
@@ -77,19 +67,14 @@ public class LoginActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
             }
         });
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
-            /**
-             * method for Register Now (on click)
-             * @param view view
-             */
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this,
+                        RegisterActivity.class);
                 startActivity(intent);
             }
         });

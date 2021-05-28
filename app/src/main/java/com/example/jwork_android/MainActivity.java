@@ -3,9 +3,6 @@ package com.example.jwork_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
@@ -28,32 +25,18 @@ import java.util.HashMap;
  * @version 27-05-2021
  */
 public class MainActivity extends AppCompatActivity {
-
     private ArrayList<Recruiter> listRecruiter = new ArrayList<>();
     private ArrayList<Job> jobIdList = new ArrayList<>();
-    private HashMap<Recruiter, ArrayList <Job>> childMapping = new HashMap<>();
+    private HashMap<Recruiter, ArrayList<Job>> childMapping = new HashMap<>();
 
-    /**
-     * method for create Menu Page
-     * @param savedInstanceState saveInstanceState
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        final ExpandableListView elvList = findViewById(R.id.lvExp);
-
-        refreshList();
-
-        elvList.setAdapter(new MainListAdapter(MainActivity.this, listRecruiter, childMapping));
-    }
+    ExpandableListAdapter expandableListAdapter;
+    ExpandableListView expandableListView;
 
     /**
      * method for refreshList
      */
     protected void refreshList() {
-        Response.Listener<String>  responseListener = new Response.Listener<String>() {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -64,53 +47,77 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject recruiter = job.getJSONObject("recruiter");
                             JSONObject location = recruiter.getJSONObject("location");
 
-                            Recruiter recruiterObject =
-                                    new Recruiter(
-                                        recruiter.getInt("id"),
-                                        recruiter.getString("name"),
-                                        recruiter.getString("email"),
-                                        recruiter.getString("phoneNumber"),
-                                            new Location (location.getString("province"),
-                                                location.getString("city"),
-                                                location.getString("description")));
+                            String city = location.getString("city");
+                            String province = location.getString("province");
+                            String description = location.getString("description");
 
-                            listRecruiter.add(recruiterObject);
+                            Location locationCS9 = new Location(province, city, description);
 
-                            Job jobObject =
-                                    new Job(
-                                        job.getInt("id"),
-                                        job.getString("name"),
-                                        recruiterObject,
-                                        job.getInt("fee"),
-                                        job.getString("Category")
-                                    );
+                            int recruiterId = recruiter.getInt("id");
+                            String recruiterName = recruiter.getString("name");
+                            String recruiterEmail = recruiter.getString("email");
+                            String recruiterPhoneNumber = recruiter.getString("phoneNumber");
 
-                            jobIdList.add(jobObject);
-                            }
-
-                        for (Recruiter rec : listRecruiter) {
-                            ArrayList<Job> temp = new ArrayList<>();
-                            for (Job job2 : jobIdList) {
-                                if (job2.getRecruiter().getName().equals(rec.getName()) ||
-                                    job2.getRecruiter().getEmail().equals(rec.getEmail()) ||
-                                    job2.getRecruiter().getPhoneNumber().equals(rec.getPhoneNumber()))
-                                {
-                                    temp.add(job2);
+                            Recruiter recruiterObject = new Recruiter(recruiterId,
+                                    recruiterName, recruiterEmail, recruiterPhoneNumber, locationCS9);
+                            if (listRecruiter.size() > 0) {
+                                boolean success = true;
+                                for (Recruiter rec : listRecruiter)
+                                    if (rec.getId() == recruiterObject.getId())
+                                        success = false;
+                                if (success) {
+                                    listRecruiter.add(recruiterObject);
                                 }
+                            } else {
+                                listRecruiter.add(recruiterObject);
                             }
-                            childMapping.put(rec, temp);
+
+                            int jobId = job.getInt("id");
+                            String jobName = job.getString("name");
+                            int jobFee = job.getInt("fee");
+                            String jobCategory = job.getString("category");
+
+                            Job jobObject = new Job(jobId, jobName, recruiterObject, jobFee, jobCategory);
+                            jobIdList.add(jobObject);
+
+                            for (Recruiter rec : listRecruiter) {
+                                ArrayList<Job> temp = new ArrayList<>();
+                                for (Job job2 : jobIdList) {
+                                    if (job2.getRecruiter().getName().equals(rec.getName()) ||
+                                            job2.getRecruiter().getEmail().equals(rec.getEmail()) ||
+                                            job2.getRecruiter().getPhoneNumber()
+                                                    .equals(rec.getPhoneNumber())) {
+                                        temp.add(job2);
+                                    }
+                                }
+                                childMapping.put(rec, temp);
+                            }
                         }
+                        expandableListAdapter = new MainListAdapter(MainActivity.this,
+                                listRecruiter, childMapping);
+                        expandableListView.setAdapter(expandableListAdapter);
                     }
                 } catch (JSONException e) {
-                    Toast.makeText(MainActivity.this,
-                            "Menu Failed",
-                            Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
             }
         };
-
         MenuRequest menuRequest = new MenuRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(menuRequest);
+    }
+
+    /**
+     * method for create Menu Page
+     * @param savedInstanceState saveInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        expandableListView = (ExpandableListView) findViewById(R.id.lvExp);
+
+        refreshList();
     }
 }

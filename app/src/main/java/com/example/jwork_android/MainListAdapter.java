@@ -21,6 +21,7 @@ public class MainListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private ArrayList<Recruiter> _listDataHeader;
     private HashMap<Recruiter, ArrayList<Job>> _listDataChild;
+    private LayoutInflater mLayoutInflater;
 
     /**
      * Constructor for MainListAdapter
@@ -32,6 +33,7 @@ public class MainListAdapter extends BaseExpandableListAdapter {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
+        mLayoutInflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     /**
@@ -42,7 +44,7 @@ public class MainListAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public String getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+        return _listDataChild.get(_listDataHeader.get(groupPosition))
                 .get(childPosititon).getName();
     }
 
@@ -73,8 +75,7 @@ public class MainListAdapter extends BaseExpandableListAdapter {
         final String childText = getChild(groupPosition, childPosition);
 
         if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.layout_job, null);
         }
 
@@ -103,7 +104,7 @@ public class MainListAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public String getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition).getName();
+        return _listDataHeader.get(groupPosition).getName();
     }
 
     /**
@@ -112,7 +113,7 @@ public class MainListAdapter extends BaseExpandableListAdapter {
      */
     @Override
     public int getGroupCount() {
-        return this._listDataHeader.size();
+        return _listDataHeader.size();
     }
 
     /**

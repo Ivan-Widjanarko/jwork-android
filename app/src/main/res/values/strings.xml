@@ -11,4 +11,18 @@
     <string name="name_label">name</string>
     <string name="name_hint">name</string>
     <string name="register_text">REGISTER</string>
+    <string name="apply_job_text">Apply Job</string>
+    <string name="job_name_text">Job Name</string>
+    <string name="job_category_text">Job Category</string>
+    <string name="job_fee_text">Job Fee</string>
+    <string name="payment_method_text">Payment Method</string>
+    <string name="referral_code_text">Referral Code</string>
+    <string name="total_fee_text">Total Fee</string>
+    <string name="text_view_text">Text View</string>
+    <string name="ewallet_text">E-Wallet</string>
+    <string name="bank_text">Bank</string>
+    <string name="apply_now_text">APPLY NOW</string>
+    <string name="count_text">COUNT</string>
+    <string name="referral_code_hint">Edit Text</string>
+    <string name="job_category">Job Category</string>
 </resources>

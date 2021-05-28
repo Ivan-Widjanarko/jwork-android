@@ -21,8 +21,7 @@ public class Job
      * @param fee Recruiter's fee
      * @param category Job's category
      */
-    public Job(int id, String name, Recruiter recruiter, int fee, String category)
-    {
+    public Job(int id, String name, Recruiter recruiter, int fee, String category){
         this.id = id;
         this.name = name;
         this.recruiter = recruiter;
@@ -34,8 +33,7 @@ public class Job
      * method for getId
      * @return    Recruiter's ID
      */
-    public int getId()
-    {
+    public int getId(){
         return id;
     }
 
@@ -43,8 +41,7 @@ public class Job
      * method for getName
      * @return    Jobs's name
      */
-    public String getName()
-    {
+    public String getName(){
         return name;
     }
 
@@ -52,8 +49,7 @@ public class Job
      * method for getFee
      * @return    Recruiter's fee
      */
-    public int getFee()
-    {
+    public int getFee(){
         return fee;
     }
 
@@ -61,8 +57,7 @@ public class Job
      * method for getCategory
      * @return   Job's category
      */
-    public String getCategory()
-    {
+    public String getCategory(){
         return category;
     }
 
@@ -70,8 +65,7 @@ public class Job
      * method for getRecruiter
      * @return    Recruiter Information
      */
-    public Recruiter getRecruiter()
-    {
+    public Recruiter getRecruiter(){
         return recruiter;
     }
 
@@ -79,8 +73,7 @@ public class Job
      * method for setId
      * @param id Recruiter's ID
      */
-    public void setId(int id)
-    {
+    public void setId(int id){
         this.id = id;
     }
 
@@ -88,17 +81,14 @@ public class Job
      * method for setName
      * @param name Jobs's name
      */
-    public void setName(String name)
-    {
+    public void setName(String name){
         this.name = name;
     }
 
     /**
      * method for setRecruiter
-     * @param recruiter Recruiter Information
      */
-    public void setRecuiter(Recruiter recruiter)
-    {
+    public void setRecruiter(){
         this.recruiter = recruiter;
     }
 
@@ -106,8 +96,7 @@ public class Job
      * method for setFee
      * @param fee Recruiter's fee
      */
-    public void setFee(int fee)
-    {
+    public void setFee(int fee){
         this.fee = fee;
     }
 
@@ -115,8 +104,7 @@ public class Job
      * method for setCategory
      * @param category Job's category
      */
-    public void setCategory(String category)
-    {
+    public void setCategory(String category){
         this.category = category;
     }
 
