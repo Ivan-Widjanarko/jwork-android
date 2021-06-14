@@ -33,17 +33,21 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        EditText logEmail = findViewById(R.id.editTextTextEmailAddress);
-        EditText logPassword = findViewById(R.id.editTextTextPassword);
+
+        EditText etEmail = findViewById(R.id.editTextTextEmailAddress);
+        EditText etPassword = findViewById(R.id.editTextTextPassword);
         Button btnLogin = findViewById(R.id.buttonLogin);
         TextView tvRegister = findViewById(R.id.textViewRegisterNow);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                String email = logEmail.getText().toString();
-                String password = logPassword.getText().toString();
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -52,13 +56,15 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Login Successful",
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("jobseekerId", jsonObject.getInt("id"));
+                                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
                             }
                         } catch (
                                 JSONException e) {
                             Toast.makeText(LoginActivity.this, "Login Failed",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 };

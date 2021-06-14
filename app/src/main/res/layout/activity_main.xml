@@ -7,7 +7,18 @@
 
     <ExpandableListView
         android:id="@+id/lvExp"
-        android:layout_height="match_parent"
+        android:layout_height="525dp"
         android:layout_width="match_parent"/>
+
+    <Button
+        android:id="@+id/btnApplyJob"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:text="APPLIED JOB"
+        android:textStyle="bold"
+        android:backgroundTint="@android:color/darker_gray"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

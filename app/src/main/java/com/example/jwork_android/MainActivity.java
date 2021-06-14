@@ -2,7 +2,10 @@ package com.example.jwork_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
 
+    private static int jobseekerId;
+
     /**
      * method for refreshList
      */
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                             String province = location.getString("province");
                             String description = location.getString("description");
 
-                            Location locationCS9 = new Location(province, city, description);
+                            Location locationObject = new Location(province, city, description);
 
                             int recruiterId = recruiter.getInt("id");
                             String recruiterName = recruiter.getString("name");
@@ -59,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                             String recruiterPhoneNumber = recruiter.getString("phoneNumber");
 
                             Recruiter recruiterObject = new Recruiter(recruiterId,
-                                    recruiterName, recruiterEmail, recruiterPhoneNumber, locationCS9);
+                                    recruiterName, recruiterEmail, recruiterPhoneNumber, locationObject);
                             if (listRecruiter.size() > 0) {
                                 boolean success = true;
                                 for (Recruiter rec : listRecruiter)
@@ -98,13 +103,25 @@ public class MainActivity extends AppCompatActivity {
                         expandableListView.setAdapter(expandableListAdapter);
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Expandable List View Failed",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         };
         MenuRequest menuRequest = new MenuRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(menuRequest);
+
+        Button btnAppliedJob = findViewById(R.id.btnApplyJob);
+        btnAppliedJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SelesaiJobActivity.class);
+                intent.putExtra("jobseekerId", jobseekerId);
+
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -116,8 +133,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            jobseekerId = extras.getInt("jobseekerId");
+        }
+
         expandableListView = (ExpandableListView) findViewById(R.id.lvExp);
 
         refreshList();
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int j, int k, long l) {
+                Intent intent = new Intent(com.example.jwork_android.MainActivity.this, ApplyJobActivity.class);
+                int jobId = childMapping.get(listRecruiter.get(j)).get(k).getId();
+                String jobName = childMapping.get(listRecruiter.get(j)).get(k).getName();
+                String jobCategory = childMapping.get(listRecruiter.get(j)).get(k).getCategory();
+                int jobFee = childMapping.get(listRecruiter.get(j)).get(k).getFee();
+
+                intent.putExtra("job_id", jobId);
+                intent.putExtra("job_name", jobName);
+                intent.putExtra("job_category", jobCategory);
+                intent.putExtra("job_fee", jobFee);
+
+                intent.putExtra("jobseekerId", jobseekerId);
+
+                startActivity(intent);
+                return true;
+            }
+        });
     }
 }
