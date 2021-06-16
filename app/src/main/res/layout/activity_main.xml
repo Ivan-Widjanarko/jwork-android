@@ -17,7 +17,6 @@
         android:layout_marginTop="10dp"
         android:text="APPLIED JOB"
         android:textStyle="bold"
-        android:backgroundTint="@android:color/darker_gray"
         android:textColor="@android:color/black"
         android:layout_gravity="center"/>
 

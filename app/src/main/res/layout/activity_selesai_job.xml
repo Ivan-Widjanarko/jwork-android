@@ -7,14 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".SelesaiJobActivity"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:id="@+id/layout_selesai">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="Invoice ID"
+        android:text="@string/invoice_id"
         android:textSize="24sp"
         android:layout_gravity="center"/>
 
@@ -112,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Refferal Code"
+            android:text="Referral Code"
             android:layout_marginTop="12dp"
             android:layout_weight="1"/>
         <TextView
@@ -193,7 +194,6 @@
             android:layout_height="50dp"
             android:text="CANCEL"
             android:textStyle="bold"
-            android:backgroundTint="@android:color/darker_gray"
             android:textColor="@android:color/black"
             android:layout_weight="1"
             android:layout_marginEnd="10dp"/>
@@ -204,7 +204,6 @@
             android:layout_height="50dp"
             android:text="FINISH"
             android:textStyle="bold"
-            android:backgroundTint="@android:color/darker_gray"
             android:textColor="@android:color/black"
             android:layout_weight="1"
             android:layout_marginStart="10dp"/>

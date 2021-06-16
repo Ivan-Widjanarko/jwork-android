@@ -25,4 +25,5 @@
     <string name="count_text">COUNT</string>
     <string name="referral_code_hint">Edit Text</string>
     <string name="job_category">Job Category</string>
+    <string name="invoice_id">Invoice ID: %d</string>
 </resources>

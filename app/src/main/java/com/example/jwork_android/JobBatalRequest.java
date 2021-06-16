@@ -16,7 +16,7 @@ import java.util.Map;
 public class JobBatalRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/invoice/invoiceStatus/";
     private Map<String, String> params;
-    private String invoiceStatus = "Cancelled";
+    private String invoiceStatus = "Canceled";
 
     /**
      * Constructor for Job Batal Request
@@ -26,8 +26,7 @@ public class JobBatalRequest extends StringRequest {
     public JobBatalRequest (String invoiceId, Response.Listener<String> listener) {
         super(Method.PUT, URL+invoiceId, listener, null);
         params = new HashMap<>();
-        params.put("id", invoiceId);
-        params.put("status", invoiceStatus);
+        params.put("invoiceStatus", invoiceStatus);
     }
 
     /**

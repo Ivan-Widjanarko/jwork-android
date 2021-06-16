@@ -90,35 +90,44 @@ public class SelesaiJobActivity extends AppCompatActivity {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.isEmpty()) {
-                    Toast.makeText(SelesaiJobActivity.this, "No Job Applied",
-                            Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SelesaiJobActivity.this, MainActivity.class);
-                    startActivity(intent);
+                try {
+                    JSONArray jsonResponse = new JSONArray(response);
+                    if (jsonResponse.length() <= 0) {
+                        Toast.makeText(SelesaiJobActivity.this, "No Job Applied",
+                                Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SelesaiJobActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+
+                    else {
+                        title.setVisibility(View.VISIBLE);
+                        staticJobseekerName.setVisibility(View.VISIBLE);
+                        staticInvoiceDate.setVisibility(View.VISIBLE);
+                        staticPayment.setVisibility(View.VISIBLE);
+                        staticInvoiceStatus.setVisibility(View.VISIBLE);
+                        staticRefCode.setVisibility(View.VISIBLE);
+                        staticRefCode.setVisibility(View.VISIBLE);
+                        staticJobNameSelesai.setVisibility(View.VISIBLE);
+                        staticTotalFee.setVisibility(View.VISIBLE);
+
+                        jobseeker_name.setVisibility(View.VISIBLE);
+                        invoice_date.setVisibility(View.VISIBLE);
+                        payment_type.setVisibility(View.VISIBLE);
+                        invoice_status.setVisibility(View.VISIBLE);
+                        referral_code.setVisibility(View.VISIBLE);
+                        job_name_invoice.setVisibility(View.VISIBLE);
+                        fee_invoice.setVisibility(View.VISIBLE);
+                        total_fee_invoice.setVisibility(View.VISIBLE);
+
+                        btnCancel.setVisibility(View.VISIBLE);
+                        btnFinish.setVisibility(View.VISIBLE);
+                    }
+
                 }
-                
-                else {
-                    title.setVisibility(View.VISIBLE);
-                    staticJobseekerName.setVisibility(View.VISIBLE);
-                    staticInvoiceDate.setVisibility(View.VISIBLE);
-                    staticPayment.setVisibility(View.VISIBLE);
-                    staticInvoiceStatus.setVisibility(View.VISIBLE);
-                    staticRefCode.setVisibility(View.VISIBLE);
-                    staticRefCode.setVisibility(View.VISIBLE);
-                    staticJobNameSelesai.setVisibility(View.VISIBLE);
-                    staticTotalFee.setVisibility(View.VISIBLE);
 
-                    jobseeker_name.setVisibility(View.VISIBLE);
-                    invoice_date.setVisibility(View.VISIBLE);
-                    payment_type.setVisibility(View.VISIBLE);
-                    invoice_status.setVisibility(View.VISIBLE);
-                    referral_code.setVisibility(View.VISIBLE);
-                    job_name_invoice.setVisibility(View.VISIBLE);
-                    fee_invoice.setVisibility(View.VISIBLE);
-                    total_fee_invoice.setVisibility(View.VISIBLE);
-
-                    btnCancel.setVisibility(View.VISIBLE);
-                    btnFinish.setVisibility(View.VISIBLE);
+                catch (JSONException e) {
+                    e.printStackTrace();
+                    System.err.println(e.getClass().getName() + ":" + e.getMessage());
                 }
 
                 try {
@@ -140,7 +149,7 @@ public class SelesaiJobActivity extends AppCompatActivity {
                         }
 
 
-                        title.setText(String.valueOf(invoiceId));
+                        title.setText(getResources().getString(R.string.invoice_id, invoiceId));
                         invoice_date.setText(date.substring(0,10));
                         payment_type.setText(paymentType);
                         total_fee_invoice.setText(String.valueOf(totalFee));
@@ -185,8 +194,7 @@ public class SelesaiJobActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Intent intent = new Intent(SelesaiJobActivity.this, MainActivity.class);
-                            startActivity(intent);
+                            finish();
                         }
                         catch (JSONException e) {
                             Toast.makeText(SelesaiJobActivity.this, "Cancel Job Failed",

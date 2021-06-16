@@ -52,7 +52,7 @@ public class ApplyJobActivity extends AppCompatActivity {
         Button hitung = findViewById(R.id.hitung);
 
 
-        btnApply.setVisibility(View.INVISIBLE);
+        btnApply.setEnabled(false);
         textCode.setVisibility(View.INVISIBLE);
         referral_code.setVisibility(View.INVISIBLE);
 
@@ -70,10 +70,14 @@ public class ApplyJobActivity extends AppCompatActivity {
                     case R.id.ewallet:
                         textCode.setVisibility(View.VISIBLE);
                         referral_code.setVisibility(View.VISIBLE);
+                        hitung.setEnabled(true);
+                        btnApply.setEnabled(false);
                         break;
                     case R.id.bank:
                         textCode.setVisibility(View.INVISIBLE);
                         referral_code.setVisibility(View.INVISIBLE);
+                        hitung.setEnabled(true);
+                        btnApply.setEnabled(false);
                         break;
                 }
             }
@@ -147,8 +151,8 @@ public class ApplyJobActivity extends AppCompatActivity {
                         break;
                 }
 
-                hitung.setVisibility(View.INVISIBLE);
-                btnApply.setVisibility(View.VISIBLE);
+                hitung.setEnabled(false);
+                btnApply.setEnabled(true);
             }
         });
 
@@ -165,7 +169,7 @@ public class ApplyJobActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject != null) {
+                            if (jsonObject.length() > 0) {
                                 Toast.makeText(ApplyJobActivity.this, "Apply Successful",
                                         Toast.LENGTH_SHORT).show();
                                 finish();
@@ -180,7 +184,7 @@ public class ApplyJobActivity extends AppCompatActivity {
                         }
 
                         catch (JSONException e) {
-                            Toast.makeText(ApplyJobActivity.this, "Apply Failed",
+                            Toast.makeText(ApplyJobActivity.this, "Error Happened when Applying",
                                     Toast.LENGTH_LONG).show();
                         }
                     }

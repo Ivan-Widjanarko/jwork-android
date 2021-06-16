@@ -26,8 +26,7 @@ public class JobSelesaiRequest extends StringRequest {
     public JobSelesaiRequest (String invoiceId, Response.Listener<String> listener) {
         super(Method.PUT, URL+invoiceId, listener, null);
         params = new HashMap<>();
-        params.put("id", invoiceId);
-        params.put("status", invoiceStatus);
+        params.put("invoiceStatus", invoiceStatus);
     }
 
     /**
