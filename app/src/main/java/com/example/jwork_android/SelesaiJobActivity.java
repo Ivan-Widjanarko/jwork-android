@@ -160,6 +160,15 @@ public class SelesaiJobActivity extends AppCompatActivity {
                         jobseekerName = jsonCustomer.getString("name");
                         jobseeker_name.setText(jobseekerName);
 
+                        if (!invoice_status.getText().equals("OnGoing")) {
+                            btnCancel.setEnabled(false);
+                            btnFinish.setEnabled(false);
+                        }
+
+                        else {
+                            btnCancel.setEnabled(true);
+                            btnFinish.setEnabled(true);
+                        }
                         JSONArray jsonJobs = jsonInvoice.getJSONArray("jobs");
                         for (int j=0; j<jsonJobs.length(); j++) {
                             JSONObject jsonJobObj = jsonJobs.getJSONObject(j);
