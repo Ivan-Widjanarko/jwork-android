@@ -18,16 +18,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class for LoginActivity
+ * Class for Login Activity
  *
  * @author Ivan Widjanarko
- * @version 27-05-2021
+ * @version 19-06-2021
  */
 public class LoginActivity extends AppCompatActivity {
 
     /**
-     * method for create Login Page
-     * @param savedInstanceState saveInstanceState
+     * Method when Login Page is created
+     * @param savedInstanceState Instance's State
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,21 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * Method when button login is clicked
+             * @param v View
+             */
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
 
+                    /**
+                     * Method when access response
+                     * @param response Response
+                     */
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -57,11 +65,12 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("jobseekerId", jsonObject.getInt("id"));
-                                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
                             }
-                        } catch (
+                        }
+                        catch (
                                 JSONException e) {
                             Toast.makeText(LoginActivity.this, "Login Failed",
                                     Toast.LENGTH_SHORT).show();
@@ -77,8 +86,13 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Method when text view register is clicked
+             * @param v View
+             */
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,
                         RegisterActivity.class);
                 startActivity(intent);

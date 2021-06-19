@@ -4,11 +4,15 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class for Apply Job Request
+ *
+ * @author Ivan Widjanarko
+ * @version 19-06-2021
+ */
 public class ApplyJobRequest extends StringRequest {
 
     private static final String URL_Ewallet = "http://10.0.2.2:8080/invoice/createEWalletPayment";
@@ -16,8 +20,11 @@ public class ApplyJobRequest extends StringRequest {
     private Map<String, String> params;
 
     /**
-     * Constructor for Login Request
-     * @param listener Listener
+     * Constructor 1 for ApplyJobRequest (via E-Wallet Payment)
+     * @param jobList Job's List
+     * @param jobseekerId Jobseeker's ID
+     * @param referralCode Referral Code
+     * @param listener Response's Listener
      */
     public ApplyJobRequest(String jobList, String jobseekerId, String referralCode, Response.Listener<String> listener) {
         super(Method.POST, URL_Ewallet, listener, null);
@@ -28,7 +35,9 @@ public class ApplyJobRequest extends StringRequest {
     }
 
     /**
-     * Constructor for Login Request
+     * Constructor 2 for ApplyJobRequest (via Bank Payment)
+     * @param jobList Job's List
+     * @param jobseekerId Jobseeker's ID
      * @param listener Listener
      */
     public ApplyJobRequest(String jobList, String jobseekerId, Response.Listener<String> listener) {
@@ -41,7 +50,7 @@ public class ApplyJobRequest extends StringRequest {
 
     /**
      * method for get params
-     * @throws AuthFailureError
+     * @throws AuthFailureError Authentication Failed Error
      * @return params
      */
     @Override

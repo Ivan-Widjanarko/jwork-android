@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class for LoginRequest
+ * Class for Login Request
  *
  * @author Ivan Widjanarko
- * @version 26-05-2021
+ * @version 19-06-2021
  */
 public class LoginRequest extends StringRequest {
 
@@ -23,7 +23,7 @@ public class LoginRequest extends StringRequest {
      * Constructor for Login Request
      * @param email Jobseeker's Email
      * @param password Jobseeker's Password
-     * @param listener Listener
+     * @param listener Response's Listener
      */
     public LoginRequest(String email, String password, Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);
@@ -34,7 +34,8 @@ public class LoginRequest extends StringRequest {
 
     /**
      * method for get params
-     * @throws AuthFailureError
+     * @throws AuthFailureError Authentication Failed Error
+     * @return params
      */
     @Override
     public Map<String, String> getParams() throws AuthFailureError {

@@ -19,11 +19,25 @@
     <string name="referral_code_text">Referral Code</string>
     <string name="total_fee_text">Total Fee</string>
     <string name="text_view_text">Text View</string>
-    <string name="ewallet_text">E-Wallet</string>
+    <string name="e_wallet_text">E-Wallet</string>
     <string name="bank_text">Bank</string>
     <string name="apply_now_text">APPLY NOW</string>
     <string name="count_text">COUNT</string>
     <string name="referral_code_hint">Edit Text</string>
     <string name="job_category">Job Category</string>
     <string name="invoice_id">Invoice ID: %d</string>
+    <string name="jobseeker_name_text">Jobseeker Name</string>
+    <string name="invoice_date_text">Invoice Date</string>
+    <string name="payment_type_text">Payment Type</string>
+    <string name="invoice_status_text">Invoice Status</string>
+    <string name="no_referral_code">No Referral Code</string>
+    <string name="job_name_title_text">Job Name:</string>
+    <string name="fee_text">Fee</string>
+    <string name="cancel_text">CANCEL</string>
+    <string name="finish_text">FINISH</string>
+    <string name="applied_job_text">APPLIED JOB</string>
+    <string name="logo_description">Jwork Logo</string>
+    <string name="line_description">Line</string>
+    <string name="admin_fee_text">Admin Fee</string>
+    <string name="no_admin_fee">0</string>
 </resources>

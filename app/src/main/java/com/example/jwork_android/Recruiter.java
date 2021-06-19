@@ -4,7 +4,7 @@ package com.example.jwork_android;
  * Class for Recruiter
  *
  * @author Ivan Widjanarko
- * @version 27-05-2021
+ * @version 19-06-2021
  */
 public class Recruiter
 {
@@ -30,7 +30,7 @@ public class Recruiter
     }
 
     /**
-     * method for getId
+     * Method for get recruiter's ID
      * @return    Recruiter's ID
      */
     public int getId()
@@ -39,7 +39,7 @@ public class Recruiter
     }
 
     /**
-     * method for getName
+     * Method for get recruiter's name
      * @return    Recruiter's name
      */
     public String getName()
@@ -48,7 +48,7 @@ public class Recruiter
     }
 
     /**
-     * method for getEmail
+     * Method for get recruiter's email
      * @return    Recruiter's email
      */
     public String getEmail()
@@ -57,7 +57,7 @@ public class Recruiter
     }
 
     /**
-     * method for getPhoneNumber
+     * Method for get recruiter's phone number
      * @return    Recruiter's phone number
      */
     public String getPhoneNumber()
@@ -66,7 +66,7 @@ public class Recruiter
     }
 
     /**
-     * method for getLocation
+     * Method for get recruiter's location
      * @return    Recruiter's location
      */
     public Location getLocation()
@@ -75,7 +75,7 @@ public class Recruiter
     }
 
     /**
-     * method for setId
+     * Method for set recruiter's ID
      * @param id Recruiter's ID
      */
     public void setId(int id)
@@ -84,7 +84,7 @@ public class Recruiter
     }
 
     /**
-     * method for setEmail
+     * Method for set recruiter's email
      * @param email Recruiter's email
      */
     public void setEmail(String email)
@@ -93,7 +93,7 @@ public class Recruiter
     }
 
     /**
-     * method for setName
+     * Method for set recruiter's name
      * @param name Recruiter's name
      */
     public void setName(String name)
@@ -102,7 +102,7 @@ public class Recruiter
     }
 
     /**
-     * method for setPhoneNumber
+     * Method for set recruiter's phone number
      * @param phoneNumber Recruiter's phone number
      */
     public void setPhoneNumber(String phoneNumber)
@@ -111,7 +111,7 @@ public class Recruiter
     }
 
     /**
-     * method for setLocation
+     * Method for set recruiter's location
      * @param location Recruiter's location
      */
     public void setLocation(Location location)
@@ -119,7 +119,10 @@ public class Recruiter
         this.location = location;
     }
 
-    /**method for print detail*/
+    /**
+     * Method for print recruiter's detail
+     * @return details
+     */
     public String toString(){
         String value =  "===================== RECRUITER =====================" + "\n" +
                 "Id = " + id + "\n" +

@@ -8,10 +8,10 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
 /**
- * Class for RegisterRequest
+ * Class for Register Request
  *
  * @author Ivan Widjanarko
- * @version 26-05-2021
+ * @version 19-06-2021
  */
 public class RegisterRequest extends StringRequest {
 
@@ -23,7 +23,7 @@ public class RegisterRequest extends StringRequest {
      * @param name Jobseeker's Name
      * @param email Jobseeker's Email
      * @param password Jobseeker's Password
-     * @param listener Listener
+     * @param listener Response's Listener
      */
     public RegisterRequest(String name, String email, String password, Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);
@@ -35,7 +35,8 @@ public class RegisterRequest extends StringRequest {
 
     /**
      * method for get params
-     * @throws AuthFailureError
+     * @throws AuthFailureError Authentication Failed Error
+     * @return params
      */
     @Override
     public Map<String, String> getParams() throws AuthFailureError {

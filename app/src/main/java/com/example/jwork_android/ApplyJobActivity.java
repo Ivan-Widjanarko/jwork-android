@@ -2,7 +2,6 @@ package com.example.jwork_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,12 +20,22 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for Apply Job Activity
+ *
+ * @author Ivan Widjanarko
+ * @version 19-06-2021
+ */
 public class ApplyJobActivity extends AppCompatActivity {
 
     private int jobseekerId, jobId, bonus;
     private String jobName, jobCategory, selectedPayment;
     private double jobFee;
 
+    /**
+     * Method when Apply Job Page is created
+     * @param savedInstanceState Instance's State
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +58,7 @@ public class ApplyJobActivity extends AppCompatActivity {
         TextView job_fee = findViewById(R.id.job_fee);
         TextView total_fee = findViewById(R.id.total_fee);
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
-        Button hitung = findViewById(R.id.hitung);
+        Button count = findViewById(R.id.count);
 
 
         btnApply.setEnabled(false);
@@ -63,37 +72,51 @@ public class ApplyJobActivity extends AppCompatActivity {
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
+            /**
+             * Method when radio group checked
+             * @param radioGroup radio group's button
+             * @param checkedId id of the checked radio group
+             */
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 RadioButton radioButton = findViewById(checkedId);
                 switch (checkedId) {
-                    case R.id.ewallet:
+                    case R.id.eWallet:
                         textCode.setVisibility(View.VISIBLE);
                         referral_code.setVisibility(View.VISIBLE);
-                        hitung.setEnabled(true);
+                        count.setEnabled(true);
                         btnApply.setEnabled(false);
                         break;
                     case R.id.bank:
                         textCode.setVisibility(View.INVISIBLE);
                         referral_code.setVisibility(View.INVISIBLE);
-                        hitung.setEnabled(true);
+                        count.setEnabled(true);
                         btnApply.setEnabled(false);
                         break;
                 }
             }
         });
 
-        hitung.setOnClickListener(new View.OnClickListener() {
+        count.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * Method when button count is clicked
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
                 int radioId = radioGroup.getCheckedRadioButtonId();
 
                 switch (radioId) {
-                    case R.id.ewallet:
+                    case R.id.eWallet:
 
                         String referralCode = referral_code.getText().toString();
                         final Response.Listener<String> bonusResponse = new Response.Listener<String>() {
+
+                            /**
+                             * Method when access response
+                             * @param response Response
+                             */
                             @Override
                             public void onResponse(String response) {
                                 if (referralCode.isEmpty()) {
@@ -134,7 +157,13 @@ public class ApplyJobActivity extends AppCompatActivity {
 
                             }
                         };
+
                         Response.ErrorListener errorReferralCode = new Response.ErrorListener() {
+
+                            /**
+                             * Method when response accessing generate error
+                             * @param error error
+                             */
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.d("Error", "Error Happened", error);
@@ -147,17 +176,21 @@ public class ApplyJobActivity extends AppCompatActivity {
                         break;
 
                     case R.id.bank:
-                        total_fee.setText(Double.toString(jobFee));
+                        total_fee.setText(Double.toString(jobFee - 5000));
                         break;
                 }
 
-                hitung.setEnabled(false);
+                count.setEnabled(false);
                 btnApply.setEnabled(true);
             }
         });
 
         btnApply.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * Method when button apply is clicked
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
                 int selectedRadioId = radioGroup.getCheckedRadioButtonId();
@@ -165,6 +198,10 @@ public class ApplyJobActivity extends AppCompatActivity {
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
 
+                    /**
+                     * Method when access response
+                     * @param response Response
+                     */
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -189,13 +226,14 @@ public class ApplyJobActivity extends AppCompatActivity {
                         }
                     }
                 };
+
                 if(selectedRadioId == R.id.bank) {
                     request = new ApplyJobRequest(String.valueOf(jobId), String.valueOf(jobseekerId), responseListener);
                     RequestQueue q = Volley.newRequestQueue(ApplyJobActivity.this);
                     q.add(request);
                 }
 
-                else if(selectedRadioId == R.id.ewallet) {
+                else if(selectedRadioId == R.id.eWallet) {
                     request = new ApplyJobRequest(String.valueOf(jobId), String.valueOf(jobseekerId), referral_code.getText().toString(), responseListener);
                     RequestQueue q = Volley.newRequestQueue(ApplyJobActivity.this);
                     q.add(request);

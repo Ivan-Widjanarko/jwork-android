@@ -4,7 +4,7 @@ package com.example.jwork_android;
  * Class for Location
  *
  * @author Ivan Widjanarko
- * @version 27-05-2021
+ * @version 19-06-2021
  */
 public class Location
 {
@@ -12,19 +12,19 @@ public class Location
 
     /**
      * Constructor for objects of class Location
-     * @param city Recruiter's City
      * @param province Recruiter's province
-     * @param description Location's Description
-     *
+     * @param city Recruiter's city
+     * @param description Recruiter location's description
      */
-    public Location(String city, String province, String description){
-        this.city = city;
+    public Location(String province, String city, String description)
+    {
         this.province = province;
+        this.city = city;
         this.description = description;
     }
 
     /**
-     * method for getProvince
+     * Method for get recruiter's province
      * @return    Recruiter's province
      */
     public String getProvince(){
@@ -32,7 +32,7 @@ public class Location
     }
 
     /**
-     * method for getCity
+     * Method for get recruiter's city
      * @return    Recruiter's city
      */
     public String getCity(){
@@ -40,7 +40,7 @@ public class Location
     }
 
     /**
-     * method for getDescription
+     * Method for get recruiter location's description
      * @return    Recruiter's description
      */
     public String getDescription(){
@@ -48,7 +48,7 @@ public class Location
     }
 
     /**
-     * method for setProvince
+     * Method for set recruiter's province
      * @param province Recruiter's province
      */
     public void setProvince(String province){
@@ -56,7 +56,7 @@ public class Location
     }
 
     /**
-     * method for setCity
+     * Method for set recruiter's city
      * @param city Recruiter's city
      */
     public void setCity(String city)
@@ -65,15 +65,18 @@ public class Location
     }
 
     /**
-     * method for setDescription
-     * @param description Recruiter's description
+     * Method for set recruiter location's description
+     * @param description Recruiter location's description
      */
     public void setDescription(String description)
     {
         this.description = description;
     }
 
-    /**method for print detail*/
+    /**
+     * Method for print recruiter location's detail
+     * @return details
+     */
     public String toString(){
         String value =  "===================== LOCATION =====================" + "\n" +
                 "Province = " + province + "\n" +

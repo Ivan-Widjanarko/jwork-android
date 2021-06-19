@@ -8,22 +8,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class for JobBatalRequest
+ * Class for Job Finished Request
  *
  * @author Ivan Widjanarko
- * @version 11-06-2021
+ * @version 19-06-2021
  */
-public class JobBatalRequest extends StringRequest {
+public class JobFinishedRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/invoice/invoiceStatus/";
     private Map<String, String> params;
-    private String invoiceStatus = "Canceled";
+    private String invoiceStatus = "Finished";
 
     /**
-     * Constructor for Job Batal Request
+     * Constructor for Job Finished Request
      * @param invoiceId Invoice's ID
-     * @param listener Listener
+     * @param listener Response's Listener
      */
-    public JobBatalRequest (String invoiceId, Response.Listener<String> listener) {
+    public JobFinishedRequest(String invoiceId, Response.Listener<String> listener) {
         super(Method.PUT, URL+invoiceId, listener, null);
         params = new HashMap<>();
         params.put("invoiceStatus", invoiceStatus);
@@ -31,7 +31,7 @@ public class JobBatalRequest extends StringRequest {
 
     /**
      * method for get params
-     * @throws AuthFailureError
+     * @throws AuthFailureError Authentication Failed Error
      * @return params
      */
     @Override

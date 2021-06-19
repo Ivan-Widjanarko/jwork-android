@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Class for MainActivity
+ * Class for Main Activity
  *
  * @author Ivan Widjanarko
- * @version 27-05-2021
+ * @version 19-06-2021
  */
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Recruiter> listRecruiter = new ArrayList<>();
@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
      */
     protected void refreshList() {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            /**
+             * Method when access response
+             * @param response Response
+             */
             @Override
             public void onResponse(String response) {
                 try {
@@ -108,15 +113,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        MenuRequest menuRequest = new MenuRequest(responseListener);
+        MainRequest mainRequest = new MainRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-        queue.add(menuRequest);
+        queue.add(mainRequest);
 
         Button btnAppliedJob = findViewById(R.id.btnApplyJob);
         btnAppliedJob.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Method when button applied job is clicked
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelesaiJobActivity.class);
+                Intent intent = new Intent(MainActivity.this, FinishedJobActivity.class);
                 intent.putExtra("jobseekerId", jobseekerId);
 
                 startActivity(intent);
@@ -125,8 +135,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * method for create Menu Page
-     * @param savedInstanceState saveInstanceState
+     * Method when Main Page is created
+     * @param savedInstanceState Instance's State
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,8 +153,17 @@ public class MainActivity extends AppCompatActivity {
         refreshList();
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
+
+            /**
+             * Method when child button in expandable list is clicked
+             * @param expandableListView Expandable List View
+             * @param v View
+             * @param j Parameter j
+             * @param k Parameter k
+             * @param l Parameter l
+             */
             @Override
-            public boolean onChildClick(ExpandableListView expandableListView, View view, int j, int k, long l) {
+            public boolean onChildClick(ExpandableListView expandableListView, View v, int j, int k, long l) {
                 Intent intent = new Intent(com.example.jwork_android.MainActivity.this, ApplyJobActivity.class);
                 int jobId = childMapping.get(listRecruiter.get(j)).get(k).getId();
                 String jobName = childMapping.get(listRecruiter.get(j)).get(k).getName();

@@ -4,7 +4,7 @@ package com.example.jwork_android;
  * Class for Job
  *
  * @author Ivan Widjanarko
- * @version 27-05-2021
+ * @version 19-06-2021
  */
 public class Job
 {
@@ -15,10 +15,10 @@ public class Job
 
     /**
      * Constructor for objects of class Job
-     * @param id Recruiter's ID
+     * @param id Job's ID
      * @param name Jobs's name
-     * @param recruiter Recruiter Information
-     * @param fee Recruiter's fee
+     * @param recruiter Recruiter
+     * @param fee Job's fee
      * @param category Job's category
      */
     public Job(int id, String name, Recruiter recruiter, int fee, String category){
@@ -30,15 +30,15 @@ public class Job
     }
 
     /**
-     * method for getId
-     * @return    Recruiter's ID
+     * Method for get job's ID
+     * @return    job's ID
      */
     public int getId(){
         return id;
     }
 
     /**
-     * method for getName
+     * Method for get job's name
      * @return    Jobs's name
      */
     public String getName(){
@@ -46,15 +46,15 @@ public class Job
     }
 
     /**
-     * method for getFee
-     * @return    Recruiter's fee
+     * Method for get job's fee
+     * @return    job's fee
      */
     public int getFee(){
         return fee;
     }
 
     /**
-     * method for getCategory
+     * Method for get job's category
      * @return   Job's category
      */
     public String getCategory(){
@@ -62,23 +62,23 @@ public class Job
     }
 
     /**
-     * method for getRecruiter
-     * @return    Recruiter Information
+     * Method for get recruiter
+     * @return    Recruiter
      */
     public Recruiter getRecruiter(){
         return recruiter;
     }
 
     /**
-     * method for setId
-     * @param id Recruiter's ID
+     * Method for set job's ID
+     * @param id Job's ID
      */
     public void setId(int id){
         this.id = id;
     }
 
     /**
-     * method for setName
+     * Method for set job's name
      * @param name Jobs's name
      */
     public void setName(String name){
@@ -86,29 +86,33 @@ public class Job
     }
 
     /**
-     * method for setRecruiter
+     * Method for set recruiter
+     * @param recruiter Recruiter
      */
-    public void setRecruiter(){
+    public void setRecruiter(Recruiter recruiter){
         this.recruiter = recruiter;
     }
 
     /**
-     * method for setFee
-     * @param fee Recruiter's fee
+     * Method for set job's fee
+     * @param fee Job's fee
      */
     public void setFee(int fee){
         this.fee = fee;
     }
 
     /**
-     * method for setCategory
+     * Method for set job's category
      * @param category Job's category
      */
     public void setCategory(String category){
         this.category = category;
     }
 
-    /**method for print detail*/
+    /**
+     * Method for print job's detail
+     * @return details
+     */
     public String toString(){
         String value =  "===================== JOB =====================" + "\n" +
                 "Id = " + id + "\n" +

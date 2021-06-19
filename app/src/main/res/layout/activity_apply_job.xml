@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,10 +9,10 @@
     android:padding="12dp">
 
     <TextView
-        android:id="@+id/pesanan"
+        android:id="@+id/invoice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apply Job"
+        android:text="@string/apply_job_text"
         android:textSize="32sp" />
 
     <LinearLayout
@@ -23,16 +22,17 @@
         android:layout_marginTop="12dp">
         <TextView
             android:id="@+id/staticJobName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Job Name"/>
+            android:text="@string/job_name_text"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/job_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="TextView"/>
+            android:text="@string/text_view_text"/>
     </LinearLayout>
 
     <LinearLayout
@@ -42,17 +42,17 @@
         android:layout_marginTop="12dp">
         <TextView
             android:id="@+id/staticCategory"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Job Category"
+            android:text="@string/job_category_text"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/job_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="TextView"/>
+            android:text="@string/text_view_text"/>
     </LinearLayout>
 
     <LinearLayout
@@ -62,17 +62,17 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/staticFee"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Job Fee"
+            android:text="@string/job_fee_text"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/job_fee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="TextView"/>
+            android:text="@string/text_view_text"/>
     </LinearLayout>
 
     <TextView
@@ -81,23 +81,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:textSize="16sp"
-        android:text="Payment Method"/>
+        android:text="@string/payment_method_text"/>
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp">
+        android:layout_marginStart="15dp">
         <RadioButton
-            android:id="@+id/ewallet"
+            android:id="@+id/eWallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-Wallet" />
+            android:text="@string/e_wallet_text" />
         <RadioButton
             android:id="@+id/bank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bank" />
+            android:text="@string/bank_text" />
     </RadioGroup>
 
     <LinearLayout
@@ -107,18 +107,20 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/textCode"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Referral Code"
+            android:text="@string/referral_code_text"
             android:layout_weight="1"/>
 
         <EditText
             android:id="@+id/referral_code"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:hint="EditText"
-            android:textSize="16sp" />
+            android:hint="@string/referral_code_hint"
+            android:textSize="16sp"
+            android:autofillHints="@string/referral_code_text"
+            android:inputType="text" />
     </LinearLayout>
 
     <LinearLayout
@@ -128,25 +130,25 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/staticTotalFee"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Total Fee"
+            android:text="@string/total_fee_text"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/total_fee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="TextView"/>
+            android:text="@string/text_view_text"/>
     </LinearLayout>
 
     <Button
-        android:id="@+id/hitung"
+        android:id="@+id/count"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
-        android:text="COUNT"
+        android:text="@string/count_text"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:layout_gravity="center"/>
@@ -156,7 +158,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="12dp"
-        android:text="APPLY NOW"
+        android:text="@string/apply_now_text"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:layout_gravity="center"/>

@@ -17,16 +17,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class for RegisterActivity
+ * Class for Register Activity
  *
  * @author Ivan Widjanarko
- * @version 26-05-2021
+ * @version 19-06-2021
  */
 public class RegisterActivity extends AppCompatActivity {
 
     /**
-     * method for create Register Page
-     * @param savedInstanceState saveInstanceState
+     * Method when Register Page is created
+     * @param savedInstanceState Instance's State
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +41,11 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
 
             /**
-             * method for Register (on click)
-             * @param view view
+             * Method when button register is clicked
+             * @param v View
              */
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 final String name = etName.getText().toString();
                 final String email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
@@ -53,8 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
 
                     /**
-                     * method for Regsiter (on response)
-                     * @param response
+                     * Method when access response
+                     * @param response Response
                      */
                     @Override
                     public void onResponse(String response) {

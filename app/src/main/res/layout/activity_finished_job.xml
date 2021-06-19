@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelesaiJobActivity"
+    tools:context=".FinishedJobActivity"
     android:orientation="vertical"
     android:padding="24dp"
-    android:id="@+id/layout_selesai">
+    android:id="@+id/layout_finished">
 
     <TextView
         android:id="@+id/title"
@@ -26,10 +25,10 @@
         android:layout_marginTop="24dp">
         <TextView
             android:id="@+id/staticJobseekerName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Jobseeker Name:"
+            android:text="@string/jobseeker_name_text"
             android:layout_marginTop="12dp"
             android:layout_weight="1"/>
         <TextView
@@ -37,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="TextView"
+            android:text="@string/text_view_text"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 
@@ -47,10 +46,10 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/staticInvoiceDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Invoice Date"
+            android:text="@string/invoice_date_text"
             android:layout_marginTop="12dp"
             android:layout_weight="1"/>
         <TextView
@@ -58,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="TextView"
+            android:text="@string/text_view_text"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 
@@ -68,10 +67,10 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/staticPaymentType"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Payment Type"
+            android:text="@string/payment_type_text"
             android:layout_marginTop="12dp"
             android:layout_weight="1"/>
         <TextView
@@ -79,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="TextView"
+            android:text="@string/text_view_text"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 
@@ -89,10 +88,10 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/staticInvoiceStatus"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Invoice Status"
+            android:text="@string/invoice_status_text"
             android:layout_marginTop="12dp"
             android:layout_weight="1"/>
         <TextView
@@ -100,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="TextView"
+            android:text="@string/text_view_text"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 
@@ -110,10 +109,10 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/staticReferralCode"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Referral Code"
+            android:text="@string/referral_code_text"
             android:layout_marginTop="12dp"
             android:layout_weight="1"/>
         <TextView
@@ -121,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="No Referral Code"
+            android:text="@string/no_referral_code"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 
@@ -130,7 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Job Name:"
+        android:text="@string/job_name_title_text"
         android:layout_marginTop="48dp"/>
 
     <LinearLayout
@@ -139,10 +138,10 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/job_name_invoice"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Job Name"
+            android:text="@string/job_name_text"
             android:layout_marginTop="12dp"
             android:layout_weight="1"/>
         <TextView
@@ -150,7 +149,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Fee"
+            android:text="@string/fee_text"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 
@@ -158,7 +157,8 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:src="@android:color/darker_gray"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/line_description" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -166,10 +166,10 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/staticTotalFee"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Total Fee"
+            android:text="@string/total_fee_text"
             android:layout_marginTop="12dp"
             android:layout_weight="1"/>
         <TextView
@@ -177,7 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Total Fee"
+            android:text="@string/total_fee_text"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 
@@ -192,7 +192,7 @@
             android:id="@+id/btnCancel"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="CANCEL"
+            android:text="@string/cancel_text"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_weight="1"
@@ -202,7 +202,7 @@
             android:id="@+id/btnFinish"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="FINISH"
+            android:text="@string/finish_text"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_weight="1"

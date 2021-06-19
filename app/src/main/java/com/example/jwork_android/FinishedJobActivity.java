@@ -17,21 +17,31 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SelesaiJobActivity extends AppCompatActivity {
+/**
+ * Class for Finished Job Activity
+ *
+ * @author Ivan Widjanarko
+ * @version 19-06-2021
+ */
+public class FinishedJobActivity extends AppCompatActivity {
     private static int jobseekerId;
     private int invoiceId, totalFee, jobFee;
     private String date, paymentType, jobseekerName, jobName, invoiceStatus, referralCode;
     private JSONObject bonus;
     private TextView title, staticJobseekerName, staticInvoiceDate, staticPayment,
-            staticInvoiceStatus, staticRefCode, staticJobNameSelesai, staticTotalFee,
+            staticInvoiceStatus, staticRefCode, staticJobNameFinished, staticTotalFee,
             jobseeker_name, invoice_date, payment_type, invoice_status, referral_code,
             job_name_invoice, fee_invoice, total_fee_invoice;
     private Button btnCancel, btnFinish;
 
+    /**
+     * Method when Finished Job Page is created
+     * @param savedInstanceState Instance's State
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selesai_job);
+        setContentView(R.layout.activity_finished_job);
 
         title = findViewById(R.id.title);
         staticJobseekerName = findViewById(R.id.staticJobseekerName);
@@ -39,7 +49,7 @@ public class SelesaiJobActivity extends AppCompatActivity {
         staticPayment = findViewById(R.id.staticPaymentType);
         staticInvoiceStatus = findViewById(R.id.staticInvoiceStatus);
         staticRefCode = findViewById(R.id.staticReferralCode);
-        staticJobNameSelesai = findViewById(R.id.staticJobNameTitle);
+        staticJobNameFinished = findViewById(R.id.staticJobNameTitle);
         staticTotalFee = findViewById(R.id.staticTotalFee);
 
         jobseeker_name = findViewById(R.id.jobseeker_name);
@@ -66,7 +76,7 @@ public class SelesaiJobActivity extends AppCompatActivity {
         staticInvoiceStatus.setVisibility(View.INVISIBLE);
         staticRefCode.setVisibility(View.INVISIBLE);
         staticRefCode.setVisibility(View.INVISIBLE);
-        staticJobNameSelesai.setVisibility(View.INVISIBLE);
+        staticJobNameFinished.setVisibility(View.INVISIBLE);
         staticTotalFee.setVisibility(View.INVISIBLE);
 
         jobseeker_name.setVisibility(View.INVISIBLE);
@@ -86,16 +96,24 @@ public class SelesaiJobActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method for job fetching
+     */
     private void fetchJob(){
         Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            /**
+             * Method when access response
+             * @param response Response
+             */
             @Override
             public void onResponse(String response) {
                 try {
                     JSONArray jsonResponse = new JSONArray(response);
                     if (jsonResponse.length() <= 0) {
-                        Toast.makeText(SelesaiJobActivity.this, "No Job Applied",
+                        Toast.makeText(FinishedJobActivity.this, "No Job Applied",
                                 Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(SelesaiJobActivity.this, MainActivity.class);
+                        Intent intent = new Intent(FinishedJobActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
 
@@ -107,7 +125,7 @@ public class SelesaiJobActivity extends AppCompatActivity {
                         staticInvoiceStatus.setVisibility(View.VISIBLE);
                         staticRefCode.setVisibility(View.VISIBLE);
                         staticRefCode.setVisibility(View.VISIBLE);
-                        staticJobNameSelesai.setVisibility(View.VISIBLE);
+                        staticJobNameFinished.setVisibility(View.VISIBLE);
                         staticTotalFee.setVisibility(View.VISIBLE);
 
                         jobseeker_name.setVisibility(View.VISIBLE);
@@ -139,7 +157,7 @@ public class SelesaiJobActivity extends AppCompatActivity {
                         date = jsonInvoice.getString("date");
                         paymentType = jsonInvoice.getString("paymentType");
                         totalFee = jsonInvoice.getInt ("totalFee");
-                        referralCode = "---";
+                        referralCode = "No Referral Code";
                         try{
                             bonus = jsonInvoice.getJSONObject("bonus");
                             referralCode = bonus.getString("referralCode");
@@ -188,17 +206,28 @@ public class SelesaiJobActivity extends AppCompatActivity {
         };
 
         JobFetchRequest jobFetchRequest = new JobFetchRequest(String.valueOf(jobseekerId), responseListener);
-        RequestQueue queue = Volley.newRequestQueue(SelesaiJobActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(FinishedJobActivity.this);
         queue.add(jobFetchRequest);
     }
 
+    /**
+     * Method for job clicked button
+     */
     private void clickedButtons(){
         btnCancel.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * Method when button cancel is clicked
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
                 Response.Listener<String> cancelListener = new Response.Listener<String>() {
 
+                    /**
+                     * Method when access response
+                     * @param response Response
+                     */
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -206,41 +235,49 @@ public class SelesaiJobActivity extends AppCompatActivity {
                             finish();
                         }
                         catch (JSONException e) {
-                            Toast.makeText(SelesaiJobActivity.this, "Cancel Job Failed",
+                            Toast.makeText(FinishedJobActivity.this, "Cancel Job Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
-                Toast.makeText(SelesaiJobActivity.this, "Job Has Been Canceled",
+                Toast.makeText(FinishedJobActivity.this, "Job Has Been Canceled",
                         Toast.LENGTH_SHORT).show();
-                JobBatalRequest jobBatalRequest = new JobBatalRequest(String.valueOf(invoiceId), cancelListener);
-                RequestQueue queue = Volley.newRequestQueue(SelesaiJobActivity.this);
-                queue.add(jobBatalRequest);
+                JobCanceledRequest jobCanceledRequest = new JobCanceledRequest(String.valueOf(invoiceId), cancelListener);
+                RequestQueue queue = Volley.newRequestQueue(FinishedJobActivity.this);
+                queue.add(jobCanceledRequest);
             }
         });
 
         btnFinish.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * Method when button finish is clicked
+             * @param v View
+             */
             @Override
             public void onClick(View v) {
                 Response.Listener<String> doneListener = new Response.Listener<String>() {
 
+                    /**
+                     * Method when access response
+                     * @param response Response
+                     */
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Intent intent = new Intent(SelesaiJobActivity.this, MainActivity.class);
+                            Intent intent = new Intent(FinishedJobActivity.this, MainActivity.class);
                             startActivity(intent);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 };
-                Toast.makeText(SelesaiJobActivity.this, "Job Has Been Finished",
+                Toast.makeText(FinishedJobActivity.this, "Job Has Been Finished",
                         Toast.LENGTH_SHORT).show();
-                JobSelesaiRequest jobSelesaiRequest = new JobSelesaiRequest(String.valueOf(invoiceId), doneListener);
-                RequestQueue queue = Volley.newRequestQueue(SelesaiJobActivity.this);
-                queue.add(jobSelesaiRequest);
+                JobFinishedRequest jobFinishedRequest = new JobFinishedRequest(String.valueOf(invoiceId), doneListener);
+                RequestQueue queue = Volley.newRequestQueue(FinishedJobActivity.this);
+                queue.add(jobFinishedRequest);
             }
         });
     }

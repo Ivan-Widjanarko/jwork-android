@@ -15,7 +15,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:text="APPLIED JOB"
+        android:text="@string/applied_job_text"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:layout_gravity="center"/>

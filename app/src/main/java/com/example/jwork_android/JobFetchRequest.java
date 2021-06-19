@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class for JobFetchRequest
+ * Class for Job Fetch Request
  *
  * @author Ivan Widjanarko
- * @version 11-06-2021
+ * @version 19-06-2021
  */
 public class JobFetchRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/invoice/jobseeker/";
@@ -20,7 +20,7 @@ public class JobFetchRequest extends StringRequest {
     /**
      * Constructor for Job Fetch Request
      * @param jobseekerId Jobseeker's ID
-     * @param listener Listener
+     * @param listener Response's Listener
      */
     public JobFetchRequest(String jobseekerId, Response.Listener<String> listener) {
         super(Method.GET, URL+jobseekerId, listener, null);
@@ -29,7 +29,7 @@ public class JobFetchRequest extends StringRequest {
 
     /**
      * method for get params
-     * @throws AuthFailureError
+     * @throws AuthFailureError Authentication Failed Error
      * @return params
      */
     @Override
