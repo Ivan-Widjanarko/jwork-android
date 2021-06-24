@@ -6,11 +6,11 @@
     <string name="password_label">password</string>
     <string name="password_hint">password</string>
     <string name="email_hint">email</string>
-    <string name="login_text">LOGIN</string>
+    <string name="login_text">Login</string>
     <string name="register_now_text">Register Now</string>
     <string name="name_label">name</string>
     <string name="name_hint">name</string>
-    <string name="register_text">REGISTER</string>
+    <string name="register_text">Register</string>
     <string name="apply_job_text">Apply Job</string>
     <string name="job_name_text">Job Name</string>
     <string name="job_category_text">Job Category</string>
@@ -21,8 +21,8 @@
     <string name="text_view_text">Text View</string>
     <string name="e_wallet_text">E-Wallet</string>
     <string name="bank_text">Bank</string>
-    <string name="apply_now_text">APPLY NOW</string>
-    <string name="count_text">COUNT</string>
+    <string name="apply_now_text">Apply Now</string>
+    <string name="count_text">Count</string>
     <string name="referral_code_hint">Edit Text</string>
     <string name="job_category">Job Category</string>
     <string name="invoice_id">Invoice ID: %d</string>
@@ -33,11 +33,57 @@
     <string name="no_referral_code">No Referral Code</string>
     <string name="job_name_title_text">Job Name:</string>
     <string name="fee_text">Fee</string>
-    <string name="cancel_text">CANCEL</string>
-    <string name="finish_text">FINISH</string>
-    <string name="applied_job_text">APPLIED JOB</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="finish_text">Finish</string>
+    <string name="applied_job_text">History</string>
     <string name="logo_description">Jwork Logo</string>
     <string name="line_description">Line</string>
     <string name="admin_fee_text">Admin Fee</string>
     <string name="no_admin_fee">0</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_about">About</string>
+    <string name="menu_logout">Log Out</string>
+    <string name="profile_text">Profile</string>
+    <string name="jobseeker_id_text">ID</string>
+    <string name="jobseeker_email_text">Email</string>
+    <string name="jobseeker_password_text">Password</string>
+    <string name="name_text">Name</string>
+    <string name="jobseeker_join_date_text">Join Date</string>
+    <string name="remove_text">Remove Account</string>
+    <string name="logout_text">Logout</string>
+    <string name="jobseeker_id">%d</string>
+    <string name="onboarding_toggle_description_password">"Password"</string>
+    <string name="text_header_about">About</string>
+    <string name="text_body_about">
+        \t\t\t\t\tThe Jwork application is an influencer application that is used for jobseekers to get the job they want.
+        This application will display various Recruiters who are currently in need of employees for the displayed work.\n\n
+        \t\t\t\t\tThere are 2 types of payment that can be used by Jobseeker, such as Bank Payment and E-Wallet Payment.
+        Especially for payments using E-Wallet, Jobseeker can earn additional income by entering a certain referral code.\n\n
+        This application was made by:\n
+        \t\t\t\t\tIvan Widjanarko\n
+        \t\t\t\t\t1806148706\n
+        \t\t\t\t\tComputer Engineering\n
+        \t\t\t\t\tUniversity of Indonesia
+    </string>
+    <string name="text_contact_about">
+        Contact Person :
+    </string>
+    <string name="email_link">\t\t\t\t\tivan.widjanarko@ui.ac.id</string>
+    <string name="linkedin_link">\t\t\t\t\thttps://www.linkedin.com/in/ivanwidjanarko/</string>
+    <string name="instagram_link">\t\t\t\t\thttps://www.instagram.com/ivanwidjanarko/</string>
+    <string name="menu_description">Menu Logo</string>
+    <string name="toolbar_title">JWORK</string>
+    <string name="pofile_description">Profile Logo</string>
+
 </resources>

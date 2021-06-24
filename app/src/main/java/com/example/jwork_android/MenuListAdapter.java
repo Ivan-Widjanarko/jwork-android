@@ -12,28 +12,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Class for Main List Adapter
+ * Class for Menu List Adapter
  *
  * @author Ivan Widjanarko
- * @version 19-06-2021
+ * @version 25-06-2021
  */
-public class MainListAdapter extends BaseExpandableListAdapter {
+public class MenuListAdapter extends BaseExpandableListAdapter {
     private final Context _context;
     private final ArrayList<Recruiter> _listDataHeader;
     private final HashMap<Recruiter, ArrayList<Job>> _listDataChild;
-    private final LayoutInflater mLayoutInflater;
 
     /**
-     * Constructor for MainListAdapter
+     * Constructor for MenuListAdapter
      * @param context Context
      * @param listDataHeader List Of Recruiters
      * @param listChildData List of Jobs
      */
-    public MainListAdapter(Context context, ArrayList<Recruiter> listDataHeader, HashMap<Recruiter, ArrayList<Job>> listChildData) {
+    public MenuListAdapter(Context context, ArrayList<Recruiter> listDataHeader, HashMap<Recruiter, ArrayList<Job>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
-        mLayoutInflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater mLayoutInflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     /**

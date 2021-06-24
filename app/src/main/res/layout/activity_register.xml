@@ -6,58 +6,93 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-    <EditText
-        android:id="@+id/editTextTextPersonNameRegister"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextNameLayoutRegister"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
-        android:autofillHints="@string/name_hint"
-        android:ems="10"
         android:hint="@string/name_hint"
-        android:inputType="textPersonName"
+        app:errorEnabled="true"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toTopOf="parent" >
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddressRegister"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextTextPersonNameRegister"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:lines="1"
+            android:autofillHints="@string/name_hint"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextEmailLayoutRegister"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:autofillHints="@string/email_hint"
-        android:ems="10"
         android:hint="@string/email_hint"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonNameRegister"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameRegister"/>
+        app:errorEnabled="true"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/editTextNameLayoutRegister"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNameLayoutRegister">
 
-    <EditText
-        android:id="@+id/editTextTextPasswordRegister"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextTextEmailAddressRegister"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/email_hint"
+            android:ems="10"
+            android:freezesText="false"
+            android:gravity="start|center"
+            android:inputType="textEmailAddress"
+            android:lines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextPasswordLayoutRegister"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:autofillHints="@string/password_hint"
-        android:ems="10"
-        android:freezesText="false"
         android:hint="@string/password_hint"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddressRegister"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressRegister" />
+        app:errorEnabled="true"
+        app:passwordToggleContentDescription="@string/onboarding_toggle_description_password"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="?colorAccent"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmailLayoutRegister"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailLayoutRegister">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextTextPasswordRegister"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:lines="1"
+            android:autofillHints="@string/password_hint"
+            android:ems="10"
+            android:freezesText="false"
+            android:inputType="textPassword"
+            app:passwordToggleEnabled="true"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="50dp"
         android:text="@string/register_text"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPasswordRegister"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordRegister" />
+        app:layout_constraintStart_toStartOf="@+id/editTextPasswordLayoutRegister"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLayoutRegister"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

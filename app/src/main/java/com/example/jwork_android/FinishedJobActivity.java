@@ -2,10 +2,13 @@ package com.example.jwork_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,18 +24,26 @@ import org.json.JSONObject;
  * Class for Finished Job Activity
  *
  * @author Ivan Widjanarko
- * @version 19-06-2021
+ * @version 25-06-2021
  */
 public class FinishedJobActivity extends AppCompatActivity {
+
     private static int jobseekerId;
     private int invoiceId, totalFee, jobFee;
     private String date, paymentType, jobseekerName, jobName, invoiceStatus, referralCode;
     private JSONObject bonus;
-    private TextView title, staticJobseekerName, staticInvoiceDate, staticPayment,
-            staticInvoiceStatus, staticRefCode, staticJobNameFinished, staticTotalFee,
-            jobseeker_name, invoice_date, payment_type, invoice_status, referral_code,
-            job_name_invoice, fee_invoice, total_fee_invoice;
+    private TextView title;
+    private TextView jobseeker_name;
+    private TextView invoice_date;
+    private TextView payment_type;
+    private TextView invoice_status;
+    private TextView referral_code;
+    private TextView job_name_invoice;
+    private TextView fee_invoice;
+    private TextView total_fee_invoice;
     private Button btnCancel, btnFinish;
+    private LinearLayout layoutFinished;
+    private int flag = 0;
 
     /**
      * Method when Finished Job Page is created
@@ -44,13 +55,6 @@ public class FinishedJobActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finished_job);
 
         title = findViewById(R.id.title);
-        staticJobseekerName = findViewById(R.id.staticJobseekerName);
-        staticInvoiceDate= findViewById(R.id.staticInvoiceDate);
-        staticPayment = findViewById(R.id.staticPaymentType);
-        staticInvoiceStatus = findViewById(R.id.staticInvoiceStatus);
-        staticRefCode = findViewById(R.id.staticReferralCode);
-        staticJobNameFinished = findViewById(R.id.staticJobNameTitle);
-        staticTotalFee = findViewById(R.id.staticTotalFee);
 
         jobseeker_name = findViewById(R.id.jobseeker_name);
         invoice_date= findViewById(R.id.invoice_date);
@@ -64,32 +68,14 @@ public class FinishedJobActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         btnFinish = findViewById(R.id.btnFinish);
 
+        layoutFinished = findViewById(R.id.layout_finished);
+
         Bundle extras = getIntent().getExtras();
         if(extras!=null) {
             jobseekerId = extras.getInt("jobseekerId");
         }
 
-        title.setVisibility(View.INVISIBLE);
-        staticJobseekerName.setVisibility(View.INVISIBLE);
-        staticInvoiceDate.setVisibility(View.INVISIBLE);
-        staticPayment.setVisibility(View.INVISIBLE);
-        staticInvoiceStatus.setVisibility(View.INVISIBLE);
-        staticRefCode.setVisibility(View.INVISIBLE);
-        staticRefCode.setVisibility(View.INVISIBLE);
-        staticJobNameFinished.setVisibility(View.INVISIBLE);
-        staticTotalFee.setVisibility(View.INVISIBLE);
-
-        jobseeker_name.setVisibility(View.INVISIBLE);
-        invoice_date.setVisibility(View.INVISIBLE);
-        payment_type.setVisibility(View.INVISIBLE);
-        invoice_status.setVisibility(View.INVISIBLE);
-        referral_code.setVisibility(View.INVISIBLE);
-        job_name_invoice.setVisibility(View.INVISIBLE);
-        fee_invoice.setVisibility(View.INVISIBLE);
-        total_fee_invoice.setVisibility(View.INVISIBLE);
-
-        btnCancel.setVisibility(View.INVISIBLE);
-        btnFinish.setVisibility(View.INVISIBLE);
+        layoutFinished.setVisibility(View.INVISIBLE);
 
         fetchJob();
         clickedButtons();
@@ -99,6 +85,7 @@ public class FinishedJobActivity extends AppCompatActivity {
     /**
      * Method for job fetching
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void fetchJob(){
         Response.Listener<String> responseListener = new Response.Listener<String>() {
 
@@ -111,34 +98,23 @@ public class FinishedJobActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonResponse = new JSONArray(response);
                     if (jsonResponse.length() <= 0) {
-                        Toast.makeText(FinishedJobActivity.this, "No Job Applied",
-                                Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(FinishedJobActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(FinishedJobActivity.this);
+
+                        builder.setTitle("Empty History");
+
+                        builder.setMessage("Sorry, there are no history yet");
+
+                        builder.setPositiveButton("OK", (dialog, which) -> {
+                            Intent intent = new Intent(FinishedJobActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            dialog.dismiss();
+                        });
+
+                        builder.show();
                     }
 
                     else {
-                        title.setVisibility(View.VISIBLE);
-                        staticJobseekerName.setVisibility(View.VISIBLE);
-                        staticInvoiceDate.setVisibility(View.VISIBLE);
-                        staticPayment.setVisibility(View.VISIBLE);
-                        staticInvoiceStatus.setVisibility(View.VISIBLE);
-                        staticRefCode.setVisibility(View.VISIBLE);
-                        staticRefCode.setVisibility(View.VISIBLE);
-                        staticJobNameFinished.setVisibility(View.VISIBLE);
-                        staticTotalFee.setVisibility(View.VISIBLE);
-
-                        jobseeker_name.setVisibility(View.VISIBLE);
-                        invoice_date.setVisibility(View.VISIBLE);
-                        payment_type.setVisibility(View.VISIBLE);
-                        invoice_status.setVisibility(View.VISIBLE);
-                        referral_code.setVisibility(View.VISIBLE);
-                        job_name_invoice.setVisibility(View.VISIBLE);
-                        fee_invoice.setVisibility(View.VISIBLE);
-                        total_fee_invoice.setVisibility(View.VISIBLE);
-
-                        btnCancel.setVisibility(View.VISIBLE);
-                        btnFinish.setVisibility(View.VISIBLE);
+                        layoutFinished.setVisibility(View.VISIBLE);
                     }
 
                 }
@@ -150,55 +126,168 @@ public class FinishedJobActivity extends AppCompatActivity {
 
                 try {
                     JSONArray jsonResponse = new JSONArray(response);
-                    for (int i=0; i<jsonResponse.length(); i++) {
-                        JSONObject jsonInvoice = jsonResponse.getJSONObject(i);
-                        invoiceStatus = jsonInvoice.getString("invoiceStatus");
-                        invoiceId = jsonInvoice.getInt("id");
-                        date = jsonInvoice.getString("date");
-                        paymentType = jsonInvoice.getString("paymentType");
-                        totalFee = jsonInvoice.getInt ("totalFee");
-                        referralCode = "No Referral Code";
-                        try{
-                            bonus = jsonInvoice.getJSONObject("bonus");
-                            referralCode = bonus.getString("referralCode");
+                    layoutFinished.setOnTouchListener(new OnSwipeTouchListener(FinishedJobActivity.this) {
+
+                        /**
+                         * Method when swiping the slide from right to the left
+                         * @throws JSONException JSON Exception
+                         */
+                        public void onSwipeRight() throws JSONException {
+                            flag +=1;
+                            if (flag <= jsonResponse.length()) {
+                                JSONObject jsonInvoice = jsonResponse.getJSONObject(flag);
+                                invoiceStatus = jsonInvoice.getString("invoiceStatus");
+                                invoiceId = jsonInvoice.getInt("id");
+                                date = jsonInvoice.getString("date");
+                                paymentType = jsonInvoice.getString("paymentType");
+                                totalFee = jsonInvoice.getInt ("totalFee");
+                                referralCode = "No Referral Code";
+                                try{
+                                    bonus = jsonInvoice.getJSONObject("bonus");
+                                    referralCode = bonus.getString("referralCode");
+                                }
+                                catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                title.setText(getResources().getString(R.string.invoice_id, invoiceId));
+                                invoice_date.setText(date.substring(0,10));
+                                payment_type.setText(paymentType);
+                                total_fee_invoice.setText(String.valueOf(totalFee));
+                                invoice_status.setText(invoiceStatus);
+                                referral_code.setText(referralCode);
+
+                                JSONObject jsonCustomer = jsonInvoice.getJSONObject("jobseeker");
+                                jobseekerName = jsonCustomer.getString("name");
+                                jobseeker_name.setText(jobseekerName);
+
+                                if (!invoice_status.getText().equals("OnGoing")) {
+                                    btnCancel.setVisibility(View.GONE);
+                                    btnFinish.setVisibility(View.GONE);
+                                } else {
+                                    btnCancel.setVisibility(View.VISIBLE);
+                                    btnFinish.setVisibility(View.VISIBLE);
+                                }
+
+                                JSONArray jsonJobs = jsonInvoice.getJSONArray("jobs");
+                                for (int j=0; j<jsonJobs.length(); j++) {
+                                    JSONObject jsonJobObj = jsonJobs.getJSONObject(j);
+                                    jobName = jsonJobObj.getString("name");
+                                    job_name_invoice.setText(jobName);
+
+                                    jobFee = jsonJobObj.getInt("fee");
+                                    fee_invoice.setText(String.valueOf(jobFee));
+                                }
+                            }
+                            else {
+                                Toast.makeText(FinishedJobActivity.this, "This is The Last Invoice",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        catch (JSONException e) {
-                            e.printStackTrace();
+
+                        /**
+                         * Method when swiping the slide from left to the right
+                         * @throws JSONException JSON Exception
+                         */
+                        public void onSwipeLeft() throws JSONException {
+                            flag -=1;
+                            if (flag >= 0) {
+                                JSONObject jsonInvoice = jsonResponse.getJSONObject(flag);
+                                invoiceStatus = jsonInvoice.getString("invoiceStatus");
+                                invoiceId = jsonInvoice.getInt("id");
+                                date = jsonInvoice.getString("date");
+                                paymentType = jsonInvoice.getString("paymentType");
+                                totalFee = jsonInvoice.getInt("totalFee");
+                                referralCode = "No Referral Code";
+                                try {
+                                    bonus = jsonInvoice.getJSONObject("bonus");
+                                    referralCode = bonus.getString("referralCode");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                title.setText(getResources().getString(R.string.invoice_id, invoiceId));
+                                invoice_date.setText(date.substring(0, 10));
+                                payment_type.setText(paymentType);
+                                total_fee_invoice.setText(String.valueOf(totalFee));
+                                invoice_status.setText(invoiceStatus);
+                                referral_code.setText(referralCode);
+
+                                JSONObject jsonCustomer = jsonInvoice.getJSONObject("jobseeker");
+                                jobseekerName = jsonCustomer.getString("name");
+                                jobseeker_name.setText(jobseekerName);
+
+                                if (!invoice_status.getText().equals("OnGoing")) {
+                                    btnCancel.setVisibility(View.GONE);
+                                    btnFinish.setVisibility(View.GONE);
+                                } else {
+                                    btnCancel.setVisibility(View.VISIBLE);
+                                    btnFinish.setVisibility(View.VISIBLE);
+                                }
+
+                                JSONArray jsonJobs = jsonInvoice.getJSONArray("jobs");
+                                for (int j = 0; j < jsonJobs.length(); j++) {
+                                    JSONObject jsonJobObj = jsonJobs.getJSONObject(j);
+                                    jobName = jsonJobObj.getString("name");
+                                    job_name_invoice.setText(jobName);
+
+                                    jobFee = jsonJobObj.getInt("fee");
+                                    fee_invoice.setText(String.valueOf(jobFee));
+                                }
+                            }
+                            else {
+                                    Toast.makeText(FinishedJobActivity.this, "This is The First Invoice",
+                                            Toast.LENGTH_SHORT).show();
+                                }
                         }
+                    });
+                    JSONObject jsonInvoice = jsonResponse.getJSONObject(flag);
+                    invoiceStatus = jsonInvoice.getString("invoiceStatus");
+                    invoiceId = jsonInvoice.getInt("id");
+                    date = jsonInvoice.getString("date");
+                    paymentType = jsonInvoice.getString("paymentType");
+                    totalFee = jsonInvoice.getInt ("totalFee");
+                    referralCode = "No Referral Code";
+                    try{
+                        bonus = jsonInvoice.getJSONObject("bonus");
+                        referralCode = bonus.getString("referralCode");
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
 
-                        title.setText(getResources().getString(R.string.invoice_id, invoiceId));
-                        invoice_date.setText(date.substring(0,10));
-                        payment_type.setText(paymentType);
-                        total_fee_invoice.setText(String.valueOf(totalFee));
-                        invoice_status.setText(invoiceStatus);
-                        referral_code.setText(referralCode);
+                    title.setText(getResources().getString(R.string.invoice_id, invoiceId));
+                    invoice_date.setText(date.substring(0,10));
+                    payment_type.setText(paymentType);
+                    total_fee_invoice.setText(String.valueOf(totalFee));
+                    invoice_status.setText(invoiceStatus);
+                    referral_code.setText(referralCode);
 
-                        JSONObject jsonCustomer = jsonInvoice.getJSONObject("jobseeker");
-                        jobseekerName = jsonCustomer.getString("name");
-                        jobseeker_name.setText(jobseekerName);
+                    JSONObject jsonCustomer = jsonInvoice.getJSONObject("jobseeker");
+                    jobseekerName = jsonCustomer.getString("name");
+                    jobseeker_name.setText(jobseekerName);
 
-                        if (!invoice_status.getText().equals("OnGoing")) {
-                            btnCancel.setEnabled(false);
-                            btnFinish.setEnabled(false);
-                        }
+                    if (!invoice_status.getText().equals("OnGoing")) {
+                        btnCancel.setVisibility(View.GONE);
+                        btnFinish.setVisibility(View.GONE);
+                    } else {
+                        btnCancel.setVisibility(View.VISIBLE);
+                        btnFinish.setVisibility(View.VISIBLE);
+                    }
 
-                        else {
-                            btnCancel.setEnabled(true);
-                            btnFinish.setEnabled(true);
-                        }
-                        JSONArray jsonJobs = jsonInvoice.getJSONArray("jobs");
-                        for (int j=0; j<jsonJobs.length(); j++) {
-                            JSONObject jsonJobObj = jsonJobs.getJSONObject(j);
-                            jobName = jsonJobObj.getString("name");
-                            job_name_invoice.setText(jobName);
+                    JSONArray jsonJobs = jsonInvoice.getJSONArray("jobs");
+                    for (int j=0; j<jsonJobs.length(); j++) {
+                        JSONObject jsonJobObj = jsonJobs.getJSONObject(j);
+                        jobName = jsonJobObj.getString("name");
+                        job_name_invoice.setText(jobName);
 
-                            jobFee = jsonJobObj.getInt("fee");
-                            fee_invoice.setText(String.valueOf(jobFee));
-                        }
+                        jobFee = jsonJobObj.getInt("fee");
+                        fee_invoice.setText(String.valueOf(jobFee));
                     }
                 }
-
                 catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -232,11 +321,14 @@ public class FinishedJobActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            Intent intent = new Intent(FinishedJobActivity.this, MainActivity.class);
+                            startActivity(intent);
                             finish();
                         }
                         catch (JSONException e) {
                             Toast.makeText(FinishedJobActivity.this, "Cancel Job Failed",
                                     Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
                         }
                     }
                 };
@@ -268,7 +360,10 @@ public class FinishedJobActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             Intent intent = new Intent(FinishedJobActivity.this, MainActivity.class);
                             startActivity(intent);
+                            finish();
                         } catch (JSONException e) {
+                            Toast.makeText(FinishedJobActivity.this, "Finish Job Failed",
+                                    Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }

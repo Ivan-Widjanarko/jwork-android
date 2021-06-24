@@ -12,9 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Jworkandroid"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".About"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Profile"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".FinishedJobActivity" />
         <activity android:name=".ApplyJobActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashScreenActivity">

@@ -2,12 +2,15 @@ package com.example.jwork_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,12 +27,12 @@ import org.json.JSONObject;
  * Class for Apply Job Activity
  *
  * @author Ivan Widjanarko
- * @version 19-06-2021
+ * @version 25-06-2021
  */
 public class ApplyJobActivity extends AppCompatActivity {
 
-    private int jobseekerId, jobId, bonus;
-    private String jobName, jobCategory, selectedPayment;
+    private int jobseekerId, jobId;
+    private String jobName, jobCategory;
     private double jobFee;
 
     /**
@@ -58,9 +61,9 @@ public class ApplyJobActivity extends AppCompatActivity {
         TextView job_fee = findViewById(R.id.job_fee);
         TextView total_fee = findViewById(R.id.total_fee);
         RadioGroup radioGroup = findViewById(R.id.radioGroup);
-        Button count = findViewById(R.id.count);
+        Button btnCount = findViewById(R.id.count);
 
-
+        btnCount.setEnabled(true);
         btnApply.setEnabled(false);
         textCode.setVisibility(View.INVISIBLE);
         referral_code.setVisibility(View.INVISIBLE);
@@ -69,6 +72,45 @@ public class ApplyJobActivity extends AppCompatActivity {
         job_category.setText(jobCategory);
         job_fee.setText(Double.toString(jobFee));
         total_fee.setText("0");
+
+        referral_code.addTextChangedListener(new TextWatcher() {
+
+            /**
+             * Method when referral code input is changed
+             * @param s Character Sequences
+             * @param start Start
+             * @param before Before
+             * @param count Count
+             */
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                btnCount.setEnabled(true);
+                btnApply.setEnabled(false);
+            }
+
+            /**
+             * Method after referral code input is changed
+             * @param s Character
+             */
+            @Override
+            public void afterTextChanged(Editable s) {
+                btnCount.setEnabled(true);
+                btnApply.setEnabled(false);
+            }
+
+            /**
+             * Method before referral code input is changed
+             * @param s Character Sequences
+             * @param start Start
+             * @param count Count
+             * @param after After
+             */
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                btnCount.setEnabled(true);
+                btnApply.setEnabled(false);
+            }
+        });
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -79,25 +121,24 @@ public class ApplyJobActivity extends AppCompatActivity {
              */
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                RadioButton radioButton = findViewById(checkedId);
                 switch (checkedId) {
                     case R.id.eWallet:
                         textCode.setVisibility(View.VISIBLE);
                         referral_code.setVisibility(View.VISIBLE);
-                        count.setEnabled(true);
+                        btnCount.setEnabled(true);
                         btnApply.setEnabled(false);
                         break;
                     case R.id.bank:
                         textCode.setVisibility(View.INVISIBLE);
                         referral_code.setVisibility(View.INVISIBLE);
-                        count.setEnabled(true);
+                        btnCount.setEnabled(true);
                         btnApply.setEnabled(false);
                         break;
                 }
             }
         });
 
-        count.setOnClickListener(new View.OnClickListener() {
+        btnCount.setOnClickListener(new View.OnClickListener() {
 
             /**
              * Method when button count is clicked
@@ -180,7 +221,7 @@ public class ApplyJobActivity extends AppCompatActivity {
                         break;
                 }
 
-                count.setEnabled(false);
+                btnCount.setEnabled(false);
                 btnApply.setEnabled(true);
             }
         });
@@ -194,6 +235,8 @@ public class ApplyJobActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int selectedRadioId = radioGroup.getCheckedRadioButtonId();
+                String referralCode = referral_code.getText().toString();
+
                 ApplyJobRequest request = null;
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -207,14 +250,49 @@ public class ApplyJobActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.length() > 0) {
-                                Toast.makeText(ApplyJobActivity.this, "Apply Successful",
-                                        Toast.LENGTH_SHORT).show();
-                                finish();
+                                if (selectedRadioId == R.id.eWallet) {
+                                    if (referralCode.isEmpty()) {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(ApplyJobActivity.this);
+
+                                        builder.setTitle("Empty Referral Code");
+
+                                        builder.setMessage("Are you sure you want to apply without referral code?");
+
+                                        builder.setPositiveButton("YES", (dialog, which) -> {
+                                            Toast.makeText(ApplyJobActivity.this, "Apply Successful",
+                                                    Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(ApplyJobActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        });
+
+                                        builder.setNegativeButton("CANCEL", (dialog, which) -> dialog.dismiss());
+
+                                        builder.show();
+                                    }
+                                    else {
+                                        Toast.makeText(ApplyJobActivity.this, "Apply Successful",
+                                                Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(ApplyJobActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                                else if (selectedRadioId == R.id.bank) {
+                                    Toast.makeText(ApplyJobActivity.this, "Apply Successful",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(ApplyJobActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
                             }
 
                             else {
                                 Toast.makeText(ApplyJobActivity.this, "Apply Failed",
                                         Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ApplyJobActivity.this, MainActivity.class);
+                                startActivity(intent);
                                 finish();
                             }
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    tools:context=".About">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/main_toolbar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_view_about_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24sp"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/text_view_about_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24sp"
+                    android:textSize="24sp"
+                    android:justificationMode="inter_word"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/text_view_about_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="24sp"
+                    android:paddingEnd="24sp"
+                    android:textSize="24sp"
+                    android:justificationMode="inter_word"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/text_view_about_link_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="24sp"
+                    android:paddingEnd="24sp"
+                    android:textSize="16sp"
+                    android:justificationMode="inter_word"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/text_view_about_link_linkedin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="24sp"
+                    android:paddingEnd="24sp"
+                    android:textSize="16sp"
+                    android:justificationMode="inter_word"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/text_view_about_link_instagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="24sp"
+                    android:paddingEnd="24sp"
+                    android:paddingBottom="24sp"
+                    android:textSize="16sp"
+                    android:justificationMode="inter_word"
+                    tools:targetApi="o" />
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white">
+
+        <include
+            layout="@layout/main_nav_drawer"/>
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

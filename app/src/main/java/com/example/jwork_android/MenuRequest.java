@@ -10,9 +10,9 @@ import java.util.Map;
  * Class for Menu Request
  *
  * @author Ivan Widjanarko
- * @version 19-06-2021
+ * @version 25-06-2021
  */
-public class MainRequest extends StringRequest {
+public class MenuRequest extends StringRequest {
 
     private static final String URL = "http://10.0.2.2:8080/job";
     private Map<String, String> params;
@@ -21,7 +21,7 @@ public class MainRequest extends StringRequest {
      * Constructor for MenuRequest
      * @param listener Response's Listener
      */
-    public MainRequest(Response.Listener<String> listener) {
+    public MenuRequest(Response.Listener<String> listener) {
         super(Method.GET, URL, listener, null);
     }
 
