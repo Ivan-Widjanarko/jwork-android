@@ -173,17 +173,30 @@ public class Profile extends AppCompatActivity {
                     public void onResponse(String response) {
                     }
                 };
-                sessionManager.setLogin(false);
-                sessionManager.setId(0);
-                Toast.makeText(Profile.this, "Account Has Been Removed",
-                        Toast.LENGTH_SHORT).show();
-                JobseekerRemoveRequest jobseekerRemoveRequest = new JobseekerRemoveRequest(String.valueOf(jobseekerId), removeListener);
-                RequestQueue queue = Volley.newRequestQueue(Profile.this);
-                queue.add(jobseekerRemoveRequest);
 
-                Intent intent = new Intent(Profile.this, LoginActivity.class);
-                startActivity(intent);
-                finishAffinity();
+                AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
+
+                builder.setTitle("Remove Account");
+
+                builder.setMessage("Are you sure to remove your account? Removed account can't be return");
+
+                builder.setPositiveButton("YES", (dialog, which) -> {
+                    sessionManager.setLogin(false);
+                    sessionManager.setId(0);
+                    Toast.makeText(Profile.this, "Account Has Been Removed",
+                            Toast.LENGTH_SHORT).show();
+                    JobseekerRemoveRequest jobseekerRemoveRequest = new JobseekerRemoveRequest(String.valueOf(jobseekerId), removeListener);
+                    RequestQueue queue = Volley.newRequestQueue(Profile.this);
+                    queue.add(jobseekerRemoveRequest);
+
+                    Intent intent = new Intent(Profile.this, LoginActivity.class);
+                    startActivity(intent);
+                    finishAffinity();
+                });
+
+                builder.setNegativeButton("CANCEL", (dialog, which) -> dialog.dismiss());
+
+                builder.show();
             }
         });
 

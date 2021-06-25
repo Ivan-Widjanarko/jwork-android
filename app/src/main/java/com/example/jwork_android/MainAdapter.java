@@ -8,9 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -125,8 +129,20 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                         break;
 
                     case 3 :
-                        activity.finishAffinity();
-                        System.exit(0);
+                        AlertDialog.Builder builderExit = new AlertDialog.Builder(activity);
+
+                        builderExit.setTitle("Exit");
+
+                        builderExit.setMessage("Are you sure to exit and close the app?");
+
+                        builderExit.setPositiveButton("YES", (dialog, which) -> {
+                            activity.finishAffinity();
+                            System.exit(0);
+                        });
+
+                        builderExit.setNegativeButton("CANCEL", (dialog, which) -> dialog.dismiss());
+
+                        builderExit.show();
                 }
             }
         });
